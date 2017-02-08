@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="static/css/styles.css" />
 <script type="text/javascript">
     /*<![CDATA[*/
-    var contextPath = "${pageContext.request.contextPath}";
+    var contextPath = document.URL;
     /*]]>*/
 </script>
 </head>
@@ -31,7 +31,7 @@
         <uib-tab index="1" heading="{{getGalleryTabTitle()}}">
             <div ng-show="!showSlides()" class="row">
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-2" ng-repeat="oneImage in images">
-                    <a href="#" class="thumbnail"> <img ng-src="{{oneImage.thumbnailPath}}" alt="..." ng-click="toggleSlideshow($index)">
+                    <a href="#" class="thumbnail"> <img ng-src="{{getFormatImageUrl(oneImage, 'thumb')}}" alt="..." ng-click="toggleSlideshow($index)">
                     </a>
                 </div>
             </div>

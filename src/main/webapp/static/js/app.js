@@ -20,7 +20,11 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, F
         if (newUrl != null) {
             url = newUrl;
         } else {
-            url = contextPath + "/service";
+            url = contextPath;
+            if (url.endsWith("#")) {
+                url = url.substring(0, url.length - 2);                
+            }
+            url = url + "/service";
         }
         $http.get(url).success(function(data, status, headers, config) {
             $scope.directories = data.directories;
@@ -60,20 +64,28 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, F
         var ratio = $window.devicePixelRatio || 1;
         var width = Math.round($window.screen.width * ratio);
         var height = Math.round($window.screen.height * ratio);
-        if (slide.mediaPath != null) {
+        if (slide.freeSizePath != null) {
             return $scope.getCustomImageUrl(slide, width, height);
         }
         return "";
     }
 
     $scope.getCustomImageUrl = function(slide, width, height) {
-        if (slide.mediaPath != null) {
-            var url = slide.mediaPath.replace("{width}", width).replace("{height}", height);
+        if (slide.freeSizePath != null) {
+            var url = slide.freeSizePath.replace("{width}", width).replace("{height}", height);
             return url;
         }
         return "";
     }
 
+    $scope.getFormatImageUrl = function(slide, format) {
+        if (slide.freeSizePath != null) {
+            var url = slide.formatPath.replace("{imageFormat}", format);
+            return url;
+        }
+        return "";
+    }
+    
     $scope.shouldShowVideo = function(index) {
         return $scope.currentVideoIndex == index;
     }
@@ -87,8 +99,8 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, F
     }
 
     $scope.getVideoUrl = function(video) {
-        if (video.mediaPath != null) {
-            var url = video.mediaPath.replace("{conversionFormat}", $scope.activeVideoFormat.id);
+        if (video.formatPath != null) {
+            var url = video.formatPath.replace("{conversionFormat}", $scope.activeVideoFormat.id);
             return url;
         }
         return "";
