@@ -7,6 +7,7 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, F
     $scope.active = true;
     $scope.images = [];
     $scope.videos = [];
+    $scope.imageFormats = [];
     $scope.videoFormats = [];
     $scope.activeVideoFormat = {};
     $scope.activeVideoFormat.id = null;
@@ -14,6 +15,7 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, F
     $scope.previousPath = null;
     $scope.currentPathDisplay = null;
     $scope.currentVideoIndex = -1;
+    $scope.allowCustomImageSizes = false;
 
     $scope.getListing = function(newUrl) {
         var url;
@@ -32,6 +34,8 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, F
             $scope.videos = data.videos;
             $scope.previousPath = data.previousPath;
             $scope.currentPathDisplay = data.currentPathDisplay;
+            $scope.allowCustomImageSizes = data.allowCustomImageSizes;
+            $scope.imageFormats = data.imageFormats;
             $scope.videoFormats = data.videoFormats;
             if ($scope.activeVideoFormat.id == null && $scope.videoFormats.length > 0) {
                 $scope.activeVideoFormat.id = $scope.videoFormats[0];
@@ -64,10 +68,27 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, F
         var ratio = $window.devicePixelRatio || 1;
         var width = Math.round($window.screen.width * ratio);
         var height = Math.round($window.screen.height * ratio);
-        if (slide.freeSizePath != null) {
+        if ($scope.allowCustomImageSizes) {
             return $scope.getCustomImageUrl(slide, width, height);
+        } else {
+            var imageFormat = $scope.determineBestImageFormat(width, height);
+            return $scope.getFormatImageUrl(slide, imageFormat.code);
         }
-        return "";
+    }
+
+    $scope.determineBestImageFormat = function(width, height) {
+        var nrPixels = width * height;
+        var bestMatchPixelsDiff = Number.MAX_SAFE_INTEGER;
+        var bestMatchImageFormat = null;
+        for (var i = 0; i < $scope.imageFormats.length; i++) {
+            var oneImageFormat = $scope.imageFormats[i];
+            var nrPixelDiff = Math.abs(oneImageFormat.width * oneImageFormat.height - nrPixels);
+            if (nrPixelDiff < bestMatchPixelsDiff) {
+                bestMatchPixelsDiff = nrPixelDiff;
+                bestMatchImageFormat = oneImageFormat;
+            }
+        }
+        return bestMatchImageFormat;
     }
 
     $scope.getCustomImageUrl = function(slide, width, height) {
@@ -78,9 +99,9 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, F
         return "";
     }
 
-    $scope.getFormatImageUrl = function(slide, format) {
+    $scope.getFormatImageUrl = function(slide, formatCode) {
         if (slide.freeSizePath != null) {
-            var url = slide.formatPath.replace("{imageFormat}", format);
+            var url = slide.formatPath.replace("{imageFormat}", formatCode);
             return url;
         }
         return "";
