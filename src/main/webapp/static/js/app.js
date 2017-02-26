@@ -16,6 +16,9 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, F
     $scope.currentPathDisplay = null;
     $scope.currentVideoIndex = -1;
     $scope.allowCustomImageSizes = false;
+	$scope.showSlidesBool = false;
+    $scope.settingFullscreen = {};
+	$scope.settingFullscreen.val = 0;
 
     $scope.getListing = function(newUrl) {
         var url;
@@ -24,7 +27,7 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, F
         } else {
             url = contextPath;
             if (url.endsWith("#")) {
-                url = url.substring(0, url.length - 2);                
+                url = url.substring(0, url.length - 2);
             }
             url = url + "/service";
         }
@@ -46,23 +49,20 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, F
     }
 
     $scope.toggleSlideshow = function(index) {
-        $scope.goFullscreen();
+		$scope.showSlidesBool = !$scope.showSlidesBool;
+		if ($scope.settingFullscreen.val) {
+			if ($scope.showSlidesBool) {
+				Fullscreen.enable(document.getElementById('fullScreenImage'));
+			} else {
+				Fullscreen.cancel();
+			}
+		}
         $scope.currentIndex = index;
     }
 
     $scope.showSlides = function() {
-        return !!Fullscreen.isEnabled();
+		return $scope.showSlidesBool;
     }
-
-    $scope.goFullscreen = function() {
-        if (Fullscreen.isEnabled()) {
-            Fullscreen.cancel();
-        } else {
-            console.log("Enabling fullscreen");
-            // Fullscreen.all();
-            Fullscreen.enable(document.getElementById('fullScreenImage'));
-        }
-    };
 
     $scope.getFullScreenImageUrl = function(slide) {
         var ratio = $window.devicePixelRatio || 1;
@@ -106,7 +106,7 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, F
         }
         return "";
     }
-    
+
     $scope.shouldShowVideo = function(index) {
         return $scope.currentVideoIndex == index;
     }
@@ -136,5 +136,12 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, F
     }
 
     $scope.getListing();
+
+	window.addEventListener("load",function() {
+		setTimeout(function(){
+			// This hides the address bar:
+			window.scrollTo(0, 1);
+		}, 0);
+	});
 
 });
