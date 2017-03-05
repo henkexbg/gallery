@@ -1,5 +1,6 @@
 # Gallery
 Responsive web application for displaying your images and videos wherever you are. Images are resized for the screen size in question, and videos are converted to configurable formats. Consists of a web application written in Java 8 using Spring framework, and a front end written in Angular JS.
+The backend is actually its own project: https://github.com/henkexbg/gallery-api. This project contains only the AngularJS frontend. However, when building the backend is automatically fetched via Maven.
 
 # Purpose
 To be able to easily make your own images and videos available without having to upload them to a 3rd-party. This webapp is up and running in a few minutes and can easily be deployed either to a home server or a virtual machine somewhere in some cloud. While it is possible to configure it in another way, this application is protected by default (with basic authentication). Different users can be set up who can access different media.
@@ -14,13 +15,22 @@ Username: sample, password: samplepw
 - A servlet container such as Apache Tomcat. Has been successfully tested with version 8 and 9.
 - Maven (if building the webapp from source). Not required during runtime.
 
-# Build
+# Maven Artifact ID
+Group: com.github.henkexbg
+Artifact ID: gallery
+Latest release version: 0.2.0
+
+# Download
+The whole WAR file can be downloaded from Maven Central. Latest version can be found here:
+https://search.maven.org/remotecontent?filepath=com/github/henkexbg/gallery/0.2.0/gallery-0.2.0.war
+
+# Build From Source
 - Go to root directory of repo [REPO_ROOT].
 - Run mvn clean package
 - In [REPO_ROOT]/target/ you can now either take the war file or the directory named gallery-X.X.X-SNAPSHOT/.
 - The war-file is essentially just a zipped version of the directory.
 
-#Configuration
+# Configuration
 For convenience, the webapp root directory will be called [WEBAPP_HOME]
 
 Edit [WEBAPP_HOME]/WEB-INF/classes/gallery.properties
@@ -37,7 +47,7 @@ gallery.groupDirAuth.properties - Points to the location of another properties f
 A recommendation would be to use SSL, either via a fronting web server such as HTTPD or by other means, but the setup of that is outside the scope of this webapp.
 
 # Known Issues
-- Browser compatibility is most likely not great. Works in Chrome both on desktop and mobile. Know that Firefox has some issues, especially with fullscreen.
+- Browser compatibility is most likely not great. Works in Chrome both on desktop and mobile. Firefox seems ok too.
 - Currently possible to uncheck video conversion mode.
 - There is no lazy loading on either gallery or slideshow, works surprisingly well up to several hundred images in one directory though.
 - Slideshow seems to load images in a slightly random order.
