@@ -3,7 +3,9 @@ Responsive web application for displaying your images and videos wherever you ar
 
 The backend is actually its own project:
 
-https://github.com/henkexbg/gallery-api. This project contains only the AngularJS frontend. However, when building this project the backend is automatically fetched via Maven and the complete webapp is created.
+https://github.com/henkexbg/gallery-api.
+
+This project contains only the AngularJS frontend. However, when building this project the backend is automatically fetched via Maven and the complete webapp is created.
 
 # Purpose
 To be able to easily make your own images and videos available without having to upload them to a 3rd-party. This webapp is up and running in a few minutes and can easily be deployed either to a home server or a virtual machine somewhere in some cloud. While it is possible to configure it in another way, this application is protected by default (with basic authentication). Different users can be set up who can access different media.
