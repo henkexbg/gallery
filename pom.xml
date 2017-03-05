@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.henkexbg</groupId>
     <artifactId>gallery</artifactId>
-    <version>0.2.0-SNAPSHOT</version>
+    <version>0.2.0</version>
     <packaging>war</packaging>
     <name>Gallery</name>
     <url>https://github.com/henkexbg/gallery</url>
@@ -95,16 +95,16 @@
         <dependency>
             <groupId>com.github.henkexbg</groupId>
             <artifactId>gallery-api</artifactId>
-            <version>0.2.0-SNAPSHOT</version>
+            <version>0.2.0</version>
             <type>war</type>
             <scope>runtime</scope>
         </dependency>
     </dependencies>
 
     <scm>
-        <connection>scm:git:https://github.com/henkexbg/gallery-api.git</connection>
-        <developerConnection>scm:git:https://github.com/henkexbg/gallery-api.git</developerConnection>
-        <url>https://github.com/henkexbg/gallery-api</url>
+        <connection>scm:git:https://github.com/henkexbg/gallery.git</connection>
+        <developerConnection>scm:git:https://github.com/henkexbg/gallery.git</developerConnection>
+        <url>https://github.com/henkexbg/gallery</url>
     </scm>
 
     <distributionManagement>
