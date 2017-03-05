@@ -6,7 +6,7 @@ To be able to easily make your own images and videos available without having to
 Focus was also put make it easy to deploy even for not super-tech-savvy people (it remains to be seen whether this goal was reached!), by for instance not requiring a database.
 
 # Demo
-https://mixedbag.se/gallery
+http://ec2-13-54-112-31.ap-southeast-2.compute.amazonaws.com:8080/gallery/
 Username: sample, password: samplepw
 
 # Prerequisites
