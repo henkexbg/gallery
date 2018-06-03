@@ -44,12 +44,11 @@
     <uib-tab index="2" heading="{{getVideoTabTitle()}}">
         <div class="btn-group" uib-dropdown is-open="status.isopen">
             <ul class="list-group">
-                <li class="list-group-item" ng-repeat="video in videos">
-                    <a href="#" ng-click="toggleVideo($index)" onclick="return false;">{{video.filename}}</a>
-                    <video ng-if="shouldShowVideo($index)" width="320" height="240" style="max-width:100%" preload="none" controls>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-2" ng-repeat="video in videos">
+					<video width="288" height="162" style="max-width:100%" preload="metadata" controls>
                         <source ng-src="{{getVideoUrl(video)}}" type="{{video.contentType}}" />
                     </video>
-                </li>
+                </div>
             </ul>
         </div>
     </uib-tab>
