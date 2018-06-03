@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="static/css/styles.css" />
     <script type="text/javascript">
             /*<![CDATA[*/
-			var contextPath = window.location.pathname;
+            var contextPath = window.location.pathname;
             /*]]>*/
-        </script>
+    </script>
     <script src="static/js/angular-1.6.9/angular.js"></script>
     <script src="static/js/angular-1.6.9/angular-animate.js"></script>
     <script src="static/js/angular-1.6.9/angular-touch.js"></script>
@@ -45,7 +45,7 @@
         <div class="btn-group" uib-dropdown is-open="status.isopen">
             <ul class="list-group">
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-2" ng-repeat="video in videos">
-					<video width="288" height="162" style="max-width:100%" preload="metadata" controls>
+                    <video width="288" height="162" style="max-width:100%" preload="metadata" controls>
                         <source ng-src="{{getVideoUrl(video)}}" type="{{video.contentType}}" />
                     </video>
                 </div>

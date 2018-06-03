@@ -1,10 +1,10 @@
 var app = angular.module('gallery', [ 'ngAnimate', 'ui.bootstrap', 'FBAngular', 'ngTouch' ]);
 
 app.config(function($locationProvider) {
-	$locationProvider.html5Mode({
-		enabled: true,
-		requireBase: false
-	});
+    $locationProvider.html5Mode({
+        enabled: true,
+        requireBase: false
+    });
 });
 
 app.controller('GalleryController', function($scope, $http, $timeout, $window, $document, $anchorScroll, $location, Fullscreen, $rootScope) {
@@ -22,16 +22,16 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, $
     $scope.currentPathDisplay = null;
     $scope.currentVideoIndex = -1;
     $scope.allowCustomImageSizes = false;
-	$scope.showSlidesBool = false;
+    $scope.showSlidesBool = false;
     $scope.settingFullscreen = {};
     $scope.settingFullscreen.val = 0;
     $scope.scrollPos = $window.pageYOffset;
-	$scope.queryParamServicePath = "p";
-	$scope.counter = 0;
+    $scope.queryParamServicePath = "p";
+    $scope.counter = 0;
 
     $scope.getListing = function(newUrl, pushState) {
-		var url;
-		var currentPushState = pushState;
+        var url;
+        var currentPushState = pushState;
         if (newUrl != null) {
             url = newUrl;
         } else {
@@ -42,8 +42,8 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, $
             url = url + "service";
         }
         $http.get(url).then(function(response) {
-			var data = response.data;			
-			$scope.directories = data.directories;
+            var data = response.data;            
+            $scope.directories = data.directories;
             $scope.images = data.images;
             $scope.videos = data.videos;
             $scope.previousPath = data.previousPath;
@@ -54,69 +54,69 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, $
             if ($scope.activeVideoFormat.id == null && $scope.videoFormats.length > 0) {
                 $scope.activeVideoFormat.id = $scope.videoFormats[0];
             }
-			var servicePathParam = $scope.generateUrlQueryParam(url)
-			if (servicePathParam) {
-				servicePathParam = "?" + servicePathParam;
-			}
-			$location.search({p: url});
-			$scope.counter++;
+            var servicePathParam = $scope.generateUrlQueryParam(url)
+            if (servicePathParam) {
+                servicePathParam = "?" + servicePathParam;
+            }
+            $location.search({p: url});
+            $scope.counter++;
         });
     }
-	
-	$scope.generateUrlQueryParam = function(serviceUrl) {
-		return $scope.queryParamServicePath + "=" + encodeURI(serviceUrl);
-	}
-	
-	$scope.getServicePathFromQueryParam = function(url) {
-		var urlParams = new URLSearchParams(url);
-		return urlParams.get($scope.queryParamServicePath);
-	}
-	
-	$scope.enableSlideshow = function(index) {
-		var slideshow = true;
-		$scope.showSlidesBool = true;
-		$scope.currentIndex = index;
-		$location.hash("slideshow");
-		if ($scope.settingFullscreen.val) {
-			Fullscreen.enable(document.getElementById('fullScreenImage'));
-		}
+    
+    $scope.generateUrlQueryParam = function(serviceUrl) {
+        return $scope.queryParamServicePath + "=" + encodeURI(serviceUrl);
     }
-	
-	$scope.disableSlideshow = function() {
-		console.debug("disableSlideshow");
-		$scope.showSlidesBool = false;
-		$scope.currentIndex = $scope.findCurrentIndex();
-		
-		if ($scope.settingFullscreen.val) {
-			Fullscreen.cancel();
-		}
-		$timeout(function(){
-			 $location.hash("image" + $scope.currentIndex);
-		}, 0);
+    
+    $scope.getServicePathFromQueryParam = function(url) {
+        var urlParams = new URLSearchParams(url);
+        return urlParams.get($scope.queryParamServicePath);
+    }
+    
+    $scope.enableSlideshow = function(index) {
+        var slideshow = true;
+        $scope.showSlidesBool = true;
+        $scope.currentIndex = index;
+        $location.hash("slideshow");
+        if ($scope.settingFullscreen.val) {
+            Fullscreen.enable(document.getElementById('fullScreenImage'));
+        }
+    }
+    
+    $scope.disableSlideshow = function() {
+        console.debug("disableSlideshow");
+        $scope.showSlidesBool = false;
+        $scope.currentIndex = $scope.findCurrentIndex();
+        
+        if ($scope.settingFullscreen.val) {
+            Fullscreen.cancel();
+        }
+        $timeout(function(){
+             $location.hash("image" + $scope.currentIndex);
+        }, 0);
 
     }
 
-	/**
-	 * There is no obvious way to find the current index of the carousel once
-	 * the user has navigated around with the arrows. Have to find the element
-	 * that is active by iterating over all of them and checking the class.
-	 */
-	$scope.findCurrentIndex = function() {
-		var carouselElems = document.getElementsByClassName("carousel-inner");
-		console.debug("carouselElems size: " + carouselElems.length);
-		var carouselChildren = carouselElems[0].children;
-		console.debug("carouselChildren size: " + carouselChildren.length);
-		for (var i = 0; i < carouselChildren.length; i++) {
-			var childActive = carouselChildren[i].classList.contains("active");
-			if (childActive) {
-				return i;
-			}
-		}
-		return 0;
-	}
+    /**
+     * There is no obvious way to find the current index of the carousel once
+     * the user has navigated around with the arrows. Have to find the element
+     * that is active by iterating over all of them and checking the class.
+     */
+    $scope.findCurrentIndex = function() {
+        var carouselElems = document.getElementsByClassName("carousel-inner");
+        console.debug("carouselElems size: " + carouselElems.length);
+        var carouselChildren = carouselElems[0].children;
+        console.debug("carouselChildren size: " + carouselChildren.length);
+        for (var i = 0; i < carouselChildren.length; i++) {
+            var childActive = carouselChildren[i].classList.contains("active");
+            if (childActive) {
+                return i;
+            }
+        }
+        return 0;
+    }
 
     $scope.showSlides = function() {
-		return $scope.showSlidesBool;
+        return $scope.showSlidesBool;
     }
 
     $scope.getFullScreenImageUrl = function(slide) {
@@ -189,50 +189,48 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, $
     $scope.getVideoTabTitle = function() {
         return "VIDEO" + (($scope.videos != null && $scope.videos.length > 0) ? " (" + $scope.videos.length + ")" : "");
     }
-	
-	$rootScope.$on('$locationChangeSuccess', function (a, newUrl, oldUrl, newState, oldState) {
-		var hashFromOldUrl = $scope.getHashFromUrlString(oldUrl);
-		$rootScope.actualLocationSearch = $location.search();
-		$rootScope.actualLocationHash = hashFromOldUrl;
+    
+    $rootScope.$on('$locationChangeSuccess', function (a, newUrl, oldUrl, newState, oldState) {
+        var hashFromOldUrl = $scope.getHashFromUrlString(oldUrl);
+        $rootScope.actualLocationSearch = $location.search();
+        $rootScope.actualLocationHash = hashFromOldUrl;
     });        
 
-	$scope.getHashFromUrlString = function(urlString) {
-		var hashIndex = urlString.indexOf("#");
-		if (hashIndex > 0) {
-			return urlString.substring(hashIndex + 1, urlString.length);
-		}
-		return urlString;
-	}
-	
+    $scope.getHashFromUrlString = function(urlString) {
+        var hashIndex = urlString.indexOf("#");
+        if (hashIndex > 0) {
+            return urlString.substring(hashIndex + 1, urlString.length);
+        }
+        return urlString;
+    }
+    
     $rootScope.$watch(function () {return $location.search()}, function (newLocation, oldLocation) {
         if($rootScope.actualLocationSearch === newLocation) {
-			console.log("Back button action. newLocation: " + JSON.stringify(newLocation) + ", oldLocation: " + JSON.stringify(oldLocation) + ", actualLocationHash: " + $rootScope.actualLocationHash);
-			if ($rootScope.actualLocationHash === "slideshow") {
-				console.log("Back button pressed while in slideshow. Exiting slideshow");
-				$scope.disableSlideshow();
-			} else {
-				$scope.getListing(newLocation.p);
-			}
+            if ($rootScope.actualLocationHash === "slideshow") {
+                $scope.disableSlideshow();
+            } else {
+                $scope.getListing(newLocation.p);
+            }
         }
     });
 
-	$scope.trimTrailingSlash = function(url) {
-		if (url.endsWith("/")) {
-			url = url.substring(0, url.length - 2);
-		}
-		return url;
-	}
-	
+    $scope.trimTrailingSlash = function(url) {
+        if (url.endsWith("/")) {
+            url = url.substring(0, url.length - 2);
+        }
+        return url;
+    }
+    
     $scope.getListing();
 
-	window.addEventListener("load",function() {
-		setTimeout(function(){
-			// This hides the address bar:
-			window.scrollTo(0, 1);
-		}, 0);
-	});
-	
-	window.onpopstate = function(event) {
-	};
+    window.addEventListener("load",function() {
+        setTimeout(function(){
+            // This hides the address bar:
+            window.scrollTo(0, 1);
+        }, 0);
+    });
+    
+    window.onpopstate = function(event) {
+    };
 
 });
