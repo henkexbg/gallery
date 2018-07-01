@@ -66,7 +66,7 @@
 <div id="fullScreenImage">
     <div uib-carousel id="carousel" interval="carouselInterval" no-wrap="noWrapSlides" active="currentIndex" ng-if="showSlides()">
         <div uib-slide ng-repeat="slide in images" index="$index">
-            <img ng-src="{{getFullScreenImageUrl(slide)}}" style="margin: auto;" ng-click="disableSlideshow()">
+            <img class="fullScreenImage" ng-src="{{getFullScreenImageUrl(slide)}}" style="margin: auto;" ng-click="disableSlideshow()">
         </div>
     </div>
 </div>
