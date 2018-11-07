@@ -8,7 +8,6 @@ body {
 }
 
 .fullScreenImage {
-    width: 100%;
 }
 
 #thumbnails {
@@ -19,6 +18,8 @@ body {
     background-color: #000000;
 	padding: 0px;
 	border: 0px;
+	width: 300px;
+	height: 300px;
 }
 
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {

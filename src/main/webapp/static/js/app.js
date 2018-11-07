@@ -25,7 +25,6 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, $
     $scope.showSlidesBool = false;
     $scope.settingFullscreen = {};
     $scope.settingFullscreen.val = 0;
-    $scope.scrollPos = $window.pageYOffset;
     $scope.queryParamServicePath = "p";
     $scope.counter = 0;
 
@@ -73,6 +72,7 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, $
     }
     
     $scope.enableSlideshow = function(index) {
+		//$scope.slides = $scope.images.slice(index - 1, index + 1);
         var slideshow = true;
         $scope.showSlidesBool = true;
         $scope.currentIndex = index;
@@ -93,8 +93,15 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, $
         $timeout(function(){
              $location.hash("image" + $scope.currentIndex);
         }, 0);
-
     }
+	
+	$scope.shouldShowSlide = function(slide, currentIndex) {
+		var slideIndex = $scope.images.indexOf(slide);
+		var shouldShowSlide = Math.abs(currentIndex - slideIndex) <= 1;
+		console.debug("slide: " + slide + ", currentIndex: " + currentIndex + ", slideIndex: " + slideIndex + ", shouldShowSlide: " + shouldShowSlide);
+		
+		return shouldShowSlide;
+	}
 
     /**
      * There is no obvious way to find the current index of the carousel once
@@ -233,4 +240,29 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, $
     window.onpopstate = function(event) {
     };
 
-});
+}).directive('lazyLoad', lazyLoad)
+
+function lazyLoad(){
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs){
+            const observer = new IntersectionObserver(loadImg)
+            const img = angular.element(element)[0];
+            observer.observe(img)
+
+            function loadImg(changes){
+                changes.forEach(change => {
+                    if(change.intersectionRatio > 0){
+                        var topLevelNodeForOneThumbnail = change.target.parentNode.parentNode;
+                        var thumbnailsRootNode = change.target.parentNode.parentNode.parentNode;
+                        var i = Array.prototype.indexOf.call(thumbnailsRootNode.children , topLevelNodeForOneThumbnail);
+                        change.target.src = scope.getFormatImageUrl(scope.images[i], 'thumb');
+						const img = angular.element(change.target)[0];
+                        observer.unobserve(img);
+                    }
+                })
+            }    
+
+        }
+    }
+};
