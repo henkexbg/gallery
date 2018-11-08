@@ -5,9 +5,12 @@ body {
 
 #fullScreenImage {
     background-color: #000000;
+    max-width: 100%;
 }
 
 .fullScreenImage {
+    max-width: 100%;
+	max-height: 100vh;
 }
 
 #thumbnails {
@@ -18,8 +21,6 @@ body {
     background-color: #000000;
 	padding: 0px;
 	border: 0px;
-	width: 300px;
-	height: 300px;
 }
 
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
@@ -46,4 +47,13 @@ body {
 
 .uib-tab {
     font-weight: bold;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+.row > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
 }
