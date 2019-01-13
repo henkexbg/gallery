@@ -42,14 +42,12 @@
         </div>
     </uib-tab>
     <uib-tab index="2" heading="{{getVideoTabTitle()}}">
-        <div class="btn-group" uib-dropdown is-open="status.isopen">
-            <ul class="list-group">
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-2" ng-repeat="video in videos">
-                    <video width="288" height="162" style="max-width:100%" preload="metadata" controls>
-                        <source ng-src="{{getVideoUrl(video)}}" type="{{video.contentType}}" />
-                    </video>
-                </div>
-            </ul>
+        <div id="videos" class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-2" ng-repeat="video in videos">
+                <video style="max-width:100%" preload="none" ng-attr-poster="{{this.getFormatImageUrl(video, 'thumb')}}" controls>
+                    <source ng-src="{{getVideoUrl(video)}}" type="{{video.contentType}}" />
+                </video>
+            </div>
         </div>
     </uib-tab>
     <uib-tab index="3" heading="SETTINGS">

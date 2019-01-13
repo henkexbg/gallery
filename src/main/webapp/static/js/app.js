@@ -183,7 +183,7 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, $
 
     $scope.getVideoUrl = function(video) {
         if (video.formatPath != null) {
-            var url = video.formatPath.replace("{conversionFormat}", $scope.activeVideoFormat.id);
+            var url = video.videoPath.replace("{conversionFormat}", $scope.activeVideoFormat.id);
             return url;
         }
         return "";
