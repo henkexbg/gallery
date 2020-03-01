@@ -19,11 +19,11 @@ Focus was also put make it easy to deploy even for not super-tech-savvy people (
 # Maven Artifact ID
 - Group: com.github.henkexbg
 - Artifact ID: gallery
-- Latest release version: 0.4.1
+- Latest release version: 0.4.2
 
 # Download
 The whole WAR file can be downloaded from Maven Central. Latest version can be found here:
-https://search.maven.org/remotecontent?filepath=com/github/henkexbg/gallery/0.2.0/gallery-0.2.0.war
+https://search.maven.org/remotecontent?filepath=com/github/henkexbg/gallery/0.4.2/gallery-0.4.2.war
 
 # Build From Source
 - Go to root directory of repo [REPO_ROOT].
@@ -32,17 +32,7 @@ https://search.maven.org/remotecontent?filepath=com/github/henkexbg/gallery/0.2.
 - The war-file is essentially just a zipped version of the directory.
 
 # Configuration
-For convenience, the webapp root directory will be called [WEBAPP_HOME]
-
-Edit [WEBAPP_HOME]/WEB-INF/classes/gallery.properties
-
-This file contains a number of properties relevant to a specific environment. Each property is described in the file but a short rundown of the essential ones follows here.
-
-gallery.resizeDir - states the directory this webapp will use to store resized images and converted videos.
-
-gallery.users.propertiesFile - Points to the location of another properties file, which is used to configure the available users of the webapp and the roles of each user.
-
-gallery.groupDirAuth.properties - Points to the location of another properties file which states which roles can access which paths.
+This app requires no configuration. However, gallery-api does, see https://github.com/henkexbg/gallery-api
 
 # Optional Configuration
 A recommendation would be to use SSL, either via a fronting web server such as HTTPD or by other means, but the setup of that is outside the scope of this webapp.
