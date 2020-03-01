@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.henkexbg</groupId>
     <artifactId>gallery</artifactId>
-    <version>0.4.0-SNAPSHOT</version>
+    <version>0.4.1</version>
     <packaging>war</packaging>
     <name>Gallery</name>
     <url>https://github.com/henkexbg/gallery</url>
-    <description>Webapp for viewing a gallery of images and videos Uses gallery-api webapp as a foundation and adds a AngularJS page on top. Image rescaling as well as video transcoding is performed based on request parameters. No UI included. Purely API-based. Authentication via HTTP basic auth (per default). Supports different user roles.</description>
+    <description>Webapp for viewing a gallery of images and videos Uses gallery-api webapp as a foundation and adds a AngularJS page on top.</description>
 
     <developers>
         <developer>
@@ -95,7 +95,7 @@
         <dependency>
             <groupId>com.github.henkexbg</groupId>
             <artifactId>gallery-api</artifactId>
-            <version>0.4.0-SNAPSHOT</version>
+            <version>0.4.0</version>
             <type>war</type>
             <scope>runtime</scope>
         </dependency>
