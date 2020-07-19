@@ -13,6 +13,11 @@ body {
 	max-height: 100vh;
 }
 
+.breadcrumb-item {
+	font-size:16px;
+	font-weight:bold
+}
+
 #thumbnails {
     background-color: #000000;
 }
@@ -21,6 +26,24 @@ body {
     background-color: #000000;
 	padding: 0px;
 	border: 0px;
+}
+
+#directories {
+    text-align: center;
+	font-weight: bold;
+}
+
+#directories a {
+	text-decoration: none;
+}
+
+.glyphicon-camera {
+	font-size: 300px
+}
+
+.btn-group {
+    font-weight: bold;
+	font-size: 18px
 }
 
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
@@ -56,4 +79,29 @@ body {
 .row > [class*='col-'] {
     display: flex;
     flex-direction: column;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {  
+
+
+}
+ 
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media (min-width: 768px) {  
+
+}
+ 
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+	.glyphicon-camera {
+		font-size: 300px
+	}
+}
+ 
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {  
+	.glyphicon-camera {
+		font-size: 300px
+	}    
 }

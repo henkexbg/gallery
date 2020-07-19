@@ -27,18 +27,22 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, $
     $scope.settingFullscreen.val = 0;
     $scope.queryParamServicePath = "p";
     $scope.counter = 0;
+	$scope.breadcrumbs = [];
 
     $scope.getListing = function(newUrl, pushState) {
         var url;
         var currentPushState = pushState;
+		
+		var basePath = contextPath;
+		if (basePath.endsWith("#")) {
+			basePath = basePath.substring(0, url.length - 2);
+		}
+		basePath = basePath + "service";
+				
         if (newUrl != null) {
             url = newUrl;
         } else {
-            url = contextPath;
-            if (url.endsWith("#")) {
-                url = url.substring(0, url.length - 2);
-            }
-            url = url + "service";
+            url = basePath;
         }
         $http.get(url).then(function(response) {
             var data = response.data;            
@@ -53,6 +57,7 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, $
             if ($scope.activeVideoFormat.id == null && $scope.videoFormats.length > 0) {
                 $scope.activeVideoFormat.id = $scope.videoFormats[0];
             }
+			$scope.breadcrumbs = $scope.generateBreadcrumbs(basePath, $scope.currentPathDisplay);
             var servicePathParam = $scope.generateUrlQueryParam(url)
             if (servicePathParam) {
                 servicePathParam = "?" + servicePathParam;
@@ -69,6 +74,19 @@ app.controller('GalleryController', function($scope, $http, $timeout, $window, $
     $scope.getServicePathFromQueryParam = function(url) {
         var urlParams = new URLSearchParams(url);
         return urlParams.get($scope.queryParamServicePath);
+    }
+	
+    $scope.generateBreadcrumbs = function(basePath, path) {
+		var breadcrumbs = [];
+		if (path) {
+			var pathParts = path.split("/");
+			var currentPath = basePath;
+			pathParts.forEach(function(item, index) {
+				currentPath += "/" + item;
+				breadcrumbs.push({displayName: item, path: currentPath});
+			});
+		}
+		return breadcrumbs;
     }
     
     $scope.enableSlideshow = function(index) {

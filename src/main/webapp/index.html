@@ -24,15 +24,21 @@
 
 <uib-tabset active="active" ng-show="!showSlides()">
     <uib-tab index="0" heading="NAVIGATION">
-        <div class="btn-group" uib-dropdown is-open="status.isopen">
-            <ul class="list-group">
-                <li class="list-group-item"><a href="#" ng-click="getListing()" onclick="return false;">Home</a></li>
-                <li class="list-group-item disabled" ng-if="currentPathDisplay">{{currentPathDisplay}}</li>
-                <li class="list-group-item" ng-if="previousPath"><a class="" href="#" ng-click="getListing(previousPath)" onclick="return false;"><span
-                        class="glyphicon glyphicon-menu-up"></span> Previous</a></li>
-                <li class="list-group-item" ng-repeat="(key, value) in directories"><a href="#" ng-click="getListing(value)" onclick="return false;">{{key}}</a></li>
-            </ul>
-        </div>
+		<a href="#" ng-click="getListing()" onclick="return false;" class="breadcrumb-item">Home</a>
+		<span class="breadcrumbs" onclick="return false;" ng-repeat="oneBreadcrumb in breadcrumbs">
+			<a class="breadcrumb-item" href="#" ng-click="getListing(oneBreadcrumb.path)" onclick="return false;" ng-if="!$last">{{oneBreadcrumb.displayName}}</a>
+			<span class="glyphicon glyphicon-chevron-right" ng-if="!$last"></span>
+			<span class="breadcrumb-item" onclick="return false;" ng-if="$last">{{oneBreadcrumb.displayName}}</span>
+		</span>
+		<div id="directories" class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3" ng-repeat="directory in directories">
+				<a href="#" class="thumbnail" onclick="return false;" ng-click="getListing(directory.path)">
+					<img alt="..." src="{{this.getFormatImageUrl(directory.image, 'directory')}}" onclick="return false;" ng-if="directory.image">
+					<span class="glyphicon glyphicon-camera" ng-show="!directory.image"></span>
+					<div>{{directory.name}}</div>
+				</a>
+			</div>
+		</div>               
     </uib-tab>
     <uib-tab index="1" heading="{{getGalleryTabTitle()}}">
         <div id="thumbnails" ng-show="!showSlides()" class="row">
