@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.henkexbg</groupId>
     <artifactId>gallery</artifactId>
-    <version>0.5.2</version>
+    <version>0.5.3</version>
     <packaging>war</packaging>
     <name>Gallery</name>
     <url>https://github.com/henkexbg/gallery</url>
@@ -24,7 +24,7 @@
     </licenses>
 
     <properties>
-        <gallery-api.version>0.5.2</gallery-api.version>
+        <gallery-api.version>0.5.3</gallery-api.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 

@@ -19,11 +19,11 @@ Focus was also put make it easy to deploy even for not super-tech-savvy people (
 # Maven Artifact ID
 - Group: com.github.henkexbg
 - Artifact ID: gallery
-- Latest release version: 0.5.2
+- Latest release version: 0.5.3
 
 # Download
 The whole WAR file can be downloaded from Maven Central. Latest version can be found here:
-https://search.maven.org/remotecontent?filepath=com/github/henkexbg/gallery/0.5.2/gallery-0.5.2.war
+https://search.maven.org/remotecontent?filepath=com/github/henkexbg/gallery/0.5.3/gallery-0.5.3.war
 
 # Build From Source
 - Go to root directory of repo [REPO_ROOT].
